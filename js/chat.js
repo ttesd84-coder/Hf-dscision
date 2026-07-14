@@ -582,22 +582,31 @@ function runChatEngine() {
             );
         }
 
-        const goalResult =
-            window.thptResult?.goal ??
-            calculateGoalStrategy(
-                window.THPT_DATA.goal
-            );
+        runCoreEngine();
 
-        const marketResult =
-            window.thptResult?.market ??
-            calculateMarketScore(
-                window.THPT_DATA.market
-            );
+const goalResult =
+    window.thptResult?.goal ??
+    calculateGoalStrategy(
+        window.THPT_DATA.goal
+    );
 
-        const portfolioResult =
-            calculateChatPortfolio(
-                window.THPT_DATA
-            );
+const marketFactor =
+    window.thptResult?.market ??
+    calculateMarketScore(
+        window.THPT_DATA.market
+    );
+
+const marketResult = {
+
+    ...marketFactor,
+
+    totalScore:
+        window.THPT_ENGINE.market.score
+
+};
+
+const portfolioResult =
+    window.THPT_ENGINE.asset;
 
         renderChatHero(
             window.THPT_DATA,

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>보유 종목 관리 | THPT Investment Pro</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/holdings.css"
+    >
+</head>
+
+<body>
+
+<div class="app holdings-app">
+
+    <header class="holdings-header">
+
+        <div>
+            <small>THPT Investment Pro</small>
+
+            <h1>보유 종목 관리</h1>
+
+            <p>
+                보유 종목을 추가하거나 수정할 수 있습니다.
+            </p>
+        </div>
+
+        <a
+            class="close-button"
+            href="./portfolio.html"
+        >
+            ×
+        </a>
+
+    </header>
+
+
+    <main class="holdings-main">
+<section class="holdings-card asset-summary-card">
+
+    <div class="holdings-title">
+
+        <div>
+            <span>자산 요약</span>
+            <h2>현재 자산 현황</h2>
+        </div>
+
+        <strong id="asset-summary-status">
+            자동 계산
+        </strong>
+
+    </div>
+
+    <div class="asset-summary-main">
+
+        <div>
+            <span>총 자산</span>
+
+            <strong id="asset-total">
+                0원
+            </strong>
+
+            <small>
+                현금 + 보유종목 평가금액
+            </small>
+        </div>
+
+    </div>
+
+    <div class="asset-summary-grid">
+
+    <div>
+        <span>보유 현금</span>
+
+        <strong id="asset-cash">
+            0원
+        </strong>
+    </div>
+
+    <div>
+        <span>투자 자산</span>
+
+        <strong id="asset-invested">
+            0원
+        </strong>
+    </div>
+
+    <div>
+        <span>현금 비중</span>
+
+        <strong id="asset-cash-ratio">
+            0.0%
+        </strong>
+    </div>
+
+</div>
+
+
+<div class="portfolio-performance-grid">
+
+    <div>
+        <span>전체 평가손익</span>
+        <strong id="portfolio-total-profit">0원</strong>
+    </div>
+
+    <div>
+        <span>전체 수익률</span>
+        <strong id="portfolio-total-profit-rate">0.00%</strong>
+    </div>
+
+    <div>
+        <span>최고 수익 종목</span>
+        <strong id="portfolio-best-holding">-</strong>
+    </div>
+
+    <div>
+        <span>최저 수익 종목</span>
+        <strong id="portfolio-worst-holding">-</strong>
+    </div>
+
+</div>
+
+
+<div class="portfolio-stats-grid">
+
+    <div>
+        <span>보유 종목 수</span>
+        <strong id="portfolio-holding-count">0개</strong>
+    </div>
+
+    <div>
+        <span>총 보유 수량</span>
+        <strong id="portfolio-total-quantity">0주</strong>
+    </div>
+
+    <div>
+        <span>평균 종목 점수</span>
+        <strong id="portfolio-average-score">0점</strong>
+    </div>
+
+
+    </div>
+
+    <label class="input-group cash-edit-group">
+
+        <span>보유 현금 수정</span>
+
+        <input
+            id="asset-cash-input"
+            type="number"
+            min="0"
+            step="10000"
+            placeholder="보유 현금을 입력하세요"
+        >
+
+    </label>
+
+    <button
+        class="save-cash-button"
+        id="save-cash"
+        type="button"
+    >
+        현금 저장
+    </button>
+
+    <p
+        class="cash-message"
+        id="cash-message"
+    ></p>
+
+</section>
+
+        <!-- 종목 입력 폼 -->
+
+        <section class="holdings-card">
+
+            <div class="holdings-title">
+
+                <div>
+                    <span>종목 입력</span>
+
+                    <h2 id="form-title">
+                        새 종목 추가
+                    </h2>
+                </div>
+
+                <button
+                    class="cancel-edit-button"
+                    id="cancel-edit"
+                    type="button"
+                    hidden
+                >
+                    수정 취소
+                </button>
+
+            </div>
+
+
+            <input
+                id="editing-index"
+                type="hidden"
+                value=""
+            >
+
+
+            <label class="input-group">
+
+                <span>종목명</span>
+
+                <input
+                    id="holding-name"
+                    type="text"
+                    placeholder="예: NAVER"
+                >
+
+            </label>
+
+
+            <div class="input-row">
+
+                <label class="input-group">
+
+                    <span>보유 수량</span>
+
+                    <input
+                        id="holding-quantity"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="0"
+                    >
+
+                </label>
+
+
+                <label class="input-group">
+
+                    <span>평균 매수가</span>
+
+                    <input
+                        id="holding-average-price"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="0"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <label class="input-group">
+
+                <span>현재가</span>
+
+                <input
+                    id="holding-current-price"
+                    type="number"
+                    min="0"
+                    step="1"
+                    placeholder="0"
+                >
+
+                <small>
+                    API 연결 전에는 직접 입력합니다.
+                </small>
+
+            </label>
+
+
+            <div class="input-row">
+
+                <label class="input-group">
+
+                    <span>종목 점수</span>
+
+                    <input
+                        id="holding-score"
+                        type="number"
+                        min="0"
+                        max="100"
+                        placeholder="선택"
+                    >
+
+                </label>
+
+
+                <label class="input-group">
+
+                    <span>현재 의견</span>
+
+                    <select id="holding-status">
+
+                        <option value="보유 유지">
+                            보유 유지
+                        </option>
+
+                        <option value="분할매수">
+                            분할매수
+                        </option>
+
+                        <option value="분할매수 대기">
+                            분할매수 대기
+                        </option>
+
+                        <option value="관망">
+                            관망
+                        </option>
+
+                        <option value="적립 유지">
+                            적립 유지
+                        </option>
+
+                        <option value="락업 유지">
+                            락업 유지
+                        </option>
+
+                        <option value="매도 검토">
+                            매도 검토
+                        </option>
+
+                    </select>
+
+                </label>
+
+            </div>
+
+
+            <div class="form-preview">
+
+                <div>
+                    <span>예상 평가금액</span>
+
+                    <strong id="preview-evaluation">
+                        0원
+                    </strong>
+                </div>
+
+                <div>
+                    <span>예상 수익률</span>
+
+                    <strong id="preview-profit">
+                        0.00%
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <button
+                class="save-holding-button"
+                id="save-holding"
+                type="button"
+            >
+                종목 저장
+            </button>
+
+
+            <p
+                class="holding-message"
+                id="holding-message"
+            ></p>
+
+        </section>
+
+
+        <!-- 보유 종목 목록 -->
+
+        <section class="holdings-card">
+
+            <div class="holdings-title">
+
+                <div>
+                    <span>현재 등록</span>
+
+                    <h2>
+                        보유 종목 목록
+                    </h2>
+                </div>
+
+                <strong id="holding-count">
+                    0개
+                </strong>
+
+            </div>
+
+
+            <div
+                class="holdings-list"
+                id="holdings-list"
+            ></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/holdings.js"></script>
+
+</body>
+</html>

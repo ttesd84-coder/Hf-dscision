@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>설정 | THPT Investment Pro</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+
+<body>
+
+<div class="app settings-app">
+
+  <header class="settings-header">
+    <div>
+      <small>THPT Investment Pro</small>
+      <h1>투자 설정</h1>
+      <p>목표와 자산 정보를 직접 관리합니다.</p>
+    </div>
+
+    <a class="close-button" href="./index.html">
+      ×
+    </a>
+  </header>
+
+
+  <main class="settings-main">
+
+    <section class="settings-card">
+
+      <div class="settings-title">
+        <span>사용자</span>
+        <h2>기본 정보</h2>
+      </div>
+
+      <label class="input-group">
+        <span>이름</span>
+
+        <input
+          id="user-name"
+          type="text"
+          placeholder="이름을 입력하세요"
+        >
+      </label>
+
+    </section>
+
+
+    <section class="settings-card">
+
+      <div class="settings-title">
+        <span>목표 설정</span>
+        <h2>투자 목표</h2>
+      </div>
+
+      <label class="input-group">
+        <span>현재 자산</span>
+
+        <input
+          id="current-asset"
+          type="number"
+          min="0"
+          step="10000"
+        >
+
+        <small>목표 달성률 계산에 사용됩니다.</small>
+      </label>
+
+
+      <label class="input-group">
+        <span>목표 금액</span>
+
+        <input
+          id="goal-amount"
+          type="number"
+          min="1"
+          step="10000"
+        >
+      </label>
+
+
+      <label class="input-group">
+        <span>남은 기간</span>
+
+        <div class="input-with-unit">
+          <input
+            id="months-remaining"
+            type="number"
+            min="1"
+            max="120"
+          >
+
+          <strong>개월</strong>
+        </div>
+      </label>
+
+    </section>
+
+
+    <section class="settings-card">
+
+      <div class="settings-title">
+        <span>자산 구성</span>
+        <h2>현금 관리</h2>
+      </div>
+
+      <label class="input-group">
+        <span>현재 보유 현금</span>
+
+        <input
+          id="cash-amount"
+          type="number"
+          min="0"
+          step="10000"
+        >
+      </label>
+
+      <div class="settings-preview">
+        <div>
+          <span>예상 전략</span>
+          <strong id="preview-strategy">계산 중</strong>
+        </div>
+
+        <div>
+          <span>월 필요 증가액</span>
+          <strong id="preview-monthly">계산 중</strong>
+        </div>
+
+        <div>
+          <span>권장 현금 비중</span>
+          <strong id="preview-cash-ratio">계산 중</strong>
+        </div>
+      </div>
+
+    </section>
+
+
+    <section class="settings-actions">
+
+      <button
+        class="reset-button"
+        id="reset-settings"
+        type="button"
+      >
+        기본값으로 초기화
+      </button>
+
+      <button
+        class="save-button"
+        id="save-settings"
+        type="button"
+      >
+        저장하기
+      </button>
+
+    </section>
+
+
+    <p class="settings-message" id="settings-message"></p>
+
+  </main>
+
+</div>
+
+
+<script src="js/data.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/settings.js"></script>
+
+</body>
+</html>

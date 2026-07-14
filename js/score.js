@@ -356,11 +356,20 @@ function runScoreEngine() {
             );
         }
 
-        const marketResult =
+        runCoreEngine();
+
+        const factorResult =
             window.thptResult?.market ??
             calculateMarketScore(
                 window.THPT_DATA.market
             );
+
+        const marketResult = {
+            ...factorResult,
+
+            totalScore:
+                window.THPT_ENGINE.market.score
+        };
 
         renderScoreHero(
             marketResult

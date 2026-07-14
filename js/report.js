@@ -477,22 +477,28 @@ function runReportEngine() {
             );
         }
 
-        const goalResult =
-            window.thptResult?.goal ??
-            calculateGoalStrategy(
-                window.THPT_DATA.goal
-            );
+        runCoreEngine();
 
-        const marketResult =
-            window.thptResult?.market ??
-            calculateMarketScore(
-                window.THPT_DATA.market
-            );
+        const goalResult =
+    window.thptResult?.goal ??
+    calculateGoalStrategy(
+        window.THPT_DATA.goal
+    );
+
+        const marketResult = {
+            ...(
+                window.thptResult?.market ??
+                calculateMarketScore(
+                    window.THPT_DATA.market
+                )
+            ),
+
+            totalScore:
+                window.THPT_ENGINE.market.score
+        };
 
         const portfolioResult =
-            calculateReportPortfolio(
-                window.THPT_DATA
-            );
+            window.THPT_ENGINE.asset;
 
         renderReportHero(
             marketResult,

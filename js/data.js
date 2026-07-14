@@ -11,6 +11,15 @@ const THPT_STORAGE_KEY = "thpt-investment-pro-data";
 ========================================================= */
 
 const THPT_DEFAULT_DATA = {
+
+    app: {
+        name: "THPT Investment Pro",
+        version: "0.2.0",
+        build: "2026.07.15",
+        lastRefresh: null,
+        debug: true
+    },
+
     user: {
         name: "태화",
         strategyType: "적극형"
@@ -23,10 +32,12 @@ const THPT_DEFAULT_DATA = {
     },
 
     assets: {
-        totalAsset: 8334614,
-        investedAsset: 5574614,
-        cash: 2760000
-    },
+      totalAsset: 8334614,
+      investedAsset: 5574614,
+      cash: 2760000,
+
+      monthlyInvestment: 0
+},
 
     market: {
         usMarketScore: 35,
@@ -65,6 +76,7 @@ const THPT_DEFAULT_DATA = {
     ],
 
     watchlist: [
+        
         {
             name: "NAVER",
             score: 84,
@@ -82,8 +94,24 @@ const THPT_DEFAULT_DATA = {
             score: 72,
             status: "관망"
         }
-    ]
+
+        
+    ],
+
+   
+
+
+transactions: [],
+
+metadata: {
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    lastRefresh: null,
+    version: "0.2.0"
+}
+
 };
+
 
 
 /* =========================================================
@@ -135,6 +163,9 @@ function loadThptData() {
 
 function saveThptData() {
     try {
+
+        window.THPT_DATA.metadata.updatedAt = Date.now();
+
         localStorage.setItem(
             THPT_STORAGE_KEY,
             JSON.stringify(
