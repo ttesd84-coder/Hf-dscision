@@ -1,17 +1,136 @@
+/* ==================================================
+   THPT Investment Pro
+   Version : v1.0 UI Foundation
+================================================== */
+
+
+/* ==================================================
+   1. Color System
+================================================== */
+
 :root{
+    --purple:#6C63FF;
+    --green:#2ECC71;
+    --white:#FFFFFF;
+    --bg:#F5F7FB;
+    --card:#FFFFFF;
+    --text:#1F2937;
+    --gray:#9CA3AF;
+    --shadow:0 8px 20px rgba(0,0,0,.08);
+    --radius:20px;
+}
 
---purple:#6C63FF;
 
---green:#27AE60;
+/* ==================================================
+   2. Reset
+================================================== */
 
---white:#FFFFFF;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
---bg:#F7F8FC;
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Pretendard, sans-serif;
+}
 
---card:#FFFFFF;
 
---text:#222;
+/* ==================================================
+   3. Layout
+================================================== */
 
---radius:20px;
+#app{
+    max-width:480px;
+    margin:auto;
+    min-height:100vh;
+    padding:20px;
+}
 
+
+/* ==================================================
+   4. Header
+================================================== */
+
+header{
+    margin-bottom:20px;
+}
+
+
+/* ==================================================
+   5. Card
+================================================== */
+
+.card{
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:18px;
+    margin-bottom:16px;
+    box-shadow:var(--shadow);
+}
+
+
+/* ==================================================
+   6. Button
+================================================== */
+
+button{
+    border:none;
+    border-radius:15px;
+    background:var(--purple);
+    color:white;
+    padding:12px 20px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+
+/* ==================================================
+   7. Bottom Navigation
+================================================== */
+
+nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:480px;
+    height:70px;
+
+    background:white;
+
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+
+    box-shadow:0 -3px 15px rgba(0,0,0,.08);
+}
+
+
+/* ==================================================
+   8. Utility
+================================================== */
+
+.title{
+    font-size:24px;
+    font-weight:700;
+}
+
+.subtitle{
+    color:var(--gray);
+    font-size:14px;
+}
+
+.score{
+    color:var(--green);
+    font-size:32px;
+    font-weight:700;
 }
