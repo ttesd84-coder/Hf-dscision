@@ -20,3 +20,27 @@ HF Decision v0.4 — Twelve Data 연결판
 - Twelve Data 플랜/심볼 권한에 따라 일부 데이터가 지연되거나 제공되지 않을 수 있습니다.
 - 국내 KRX 종목 실시간 가격은 이 연결만으로 보장되지 않습니다.
 - 시장점수 공식은 첫 버전의 단순 규칙이며 추후 조정 가능합니다.
+
+## Current Version
+
+**v0.1.0 Prototype**
+
+### Completed
+- Home UI
+- Portfolio UI
+- Score UI
+- Report UI
+- THPT AI UI
+- Goal Engine
+- Market Score Engine
+- Portfolio Engine
+- Report Engine
+- Chat Engine
+- Shared Data
+- Local Storage
+
+### Next
+- 사용자 설정 화면
+- 실제 시장 API
+- OpenAI API
+- 자동 리포트
