@@ -1,29 +1,13 @@
-/* ==================================================
+/* ==========================================================
    THPT Investment Pro
-   Version : v1.0 UI Foundation
-================================================== */
+   Sprint 1 · Day 2 · Mission 4
+   Home UI Design System
+========================================================== */
 
 
-/* ==================================================
-   1. Color System
-================================================== */
-
-:root{
-    --purple:#6C63FF;
-    --green:#2ECC71;
-    --white:#FFFFFF;
-    --bg:#F5F7FB;
-    --card:#FFFFFF;
-    --text:#1F2937;
-    --gray:#9CA3AF;
-    --shadow:0 8px 20px rgba(0,0,0,.08);
-    --radius:20px;
-}
-
-
-/* ==================================================
-   2. Reset
-================================================== */
+/* ==========================================================
+   1. Reset
+========================================================== */
 
 *{
     margin:0;
@@ -31,106 +15,844 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:Pretendard, sans-serif;
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(124, 92, 255, 0.14),
+            transparent 32%
+        ),
+        linear-gradient(
+            180deg,
+            #F8F7FF 0%,
+            #F4F8F6 100%
+        );
+
+    color:#222536;
+
+    font-family:
+        Pretendard,
+        "Noto Sans KR",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    line-height:1.5;
+    overflow-x:hidden;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
 }
 
 
-/* ==================================================
-   3. Layout
-================================================== */
+/* ==========================================================
+   2. Color System
+========================================================== */
+
+:root{
+    --purple:#7257F5;
+    --purple-dark:#5638D8;
+    --purple-soft:#EFEBFF;
+
+    --green:#28C77A;
+    --green-dark:#119A59;
+    --green-soft:#E8F9F0;
+
+    --red:#F05252;
+    --red-soft:#FFF0F0;
+
+    --yellow:#F2B84B;
+    --yellow-soft:#FFF8E6;
+
+    --white:#FFFFFF;
+
+    --background:#F6F7FB;
+    --card:#FFFFFF;
+
+    --text:#222536;
+    --text-soft:#5D6375;
+    --gray:#9298A8;
+    --line:#E8EAF0;
+
+    --shadow:
+        0 14px 35px
+        rgba(52, 41, 115, 0.08);
+
+    --shadow-hover:
+        0 18px 42px
+        rgba(52, 41, 115, 0.13);
+
+    --radius-large:26px;
+    --radius-medium:20px;
+    --radius-small:14px;
+}
+
+
+/* ==========================================================
+   3. App Layout
+========================================================== */
 
 #app{
-    max-width:480px;
-    margin:auto;
-    min-height:100vh;
-    padding:20px;
-}
-
-
-/* ==================================================
-   4. Header
-================================================== */
-
-header{
-    margin-bottom:20px;
-}
-
-
-/* ==================================================
-   5. Card
-================================================== */
-
-.card{
-    background:var(--card);
-    border-radius:var(--radius);
-    padding:18px;
-    margin-bottom:16px;
-    box-shadow:var(--shadow);
-}
-
-
-/* ==================================================
-   6. Button
-================================================== */
-
-button{
-    border:none;
-    border-radius:15px;
-    background:var(--purple);
-    color:white;
-    padding:12px 20px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:600;
-}
-
-button:hover{
-    opacity:.9;
-}
-
-
-/* ==================================================
-   7. Bottom Navigation
-================================================== */
-
-nav{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
     width:100%;
     max-width:480px;
-    height:70px;
+    min-height:100vh;
 
-    background:white;
+    margin:0 auto;
 
+    padding:
+        24px
+        18px
+        110px;
+}
+
+#header{
+    margin-bottom:18px;
+}
+
+#main-content{
     display:flex;
-    justify-content:space-around;
-    align-items:center;
+    flex-direction:column;
+    gap:18px;
+}
 
-    box-shadow:0 -3px 15px rgba(0,0,0,.08);
+#home{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
 }
 
 
-/* ==================================================
-   8. Utility
-================================================== */
+/* ==========================================================
+   4. General Card
+========================================================== */
+
+.card{
+    position:relative;
+
+    width:100%;
+
+    padding:21px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.98),
+            rgba(255, 255, 255, 0.88)
+        );
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.85);
+
+    border-radius:var(--radius-large);
+
+    box-shadow:var(--shadow);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-hover);
+}
+
+.card::after{
+    content:"";
+
+    position:absolute;
+
+    right:-45px;
+    bottom:-50px;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(114, 87, 245, 0.08),
+            transparent 68%
+        );
+
+    pointer-events:none;
+}
+
+
+/* ==========================================================
+   5. Two-column Row
+========================================================== */
+
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.row .card{
+    min-width:0;
+    padding:19px;
+}
+
+
+/* ==========================================================
+   6. Typography
+========================================================== */
 
 .title{
-    font-size:24px;
-    font-weight:700;
+    margin-top:3px;
+
+    font-size:27px;
+    font-weight:850;
+    letter-spacing:-0.8px;
 }
 
 .subtitle{
     color:var(--gray);
-    font-size:14px;
+
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:-0.2px;
+}
+
+.card h1,
+.card h2,
+.card h3{
+    color:var(--text);
+    letter-spacing:-0.7px;
+}
+
+.card h2{
+    margin-top:5px;
+
+    font-size:20px;
+    line-height:1.35;
+    font-weight:800;
+}
+
+.card p{
+    position:relative;
+    z-index:1;
+}
+
+.card p + p{
+    margin-top:7px;
 }
 
 .score{
+    margin-top:8px;
+
     color:var(--green);
-    font-size:32px;
+
+    font-size:44px;
+    line-height:1;
+    font-weight:900;
+    letter-spacing:-1.5px;
+}
+
+
+/* ==========================================================
+   7. Brand Card
+========================================================== */
+
+#home > .card:first-child{
+    min-height:176px;
+
+    padding:25px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6F52F5 0%,
+            #805DFA 52%,
+            #2DC982 145%
+        );
+
+    border:none;
+
+    box-shadow:
+        0 18px 42px
+        rgba(103, 76, 225, 0.25);
+}
+
+#home > .card:first-child::before{
+    content:"THPT";
+
+    position:absolute;
+
+    top:17px;
+    right:18px;
+
+    color:rgba(255, 255, 255, 0.13);
+
+    font-size:52px;
+    font-weight:950;
+    letter-spacing:-4px;
+}
+
+#home > .card:first-child::after{
+    width:165px;
+    height:165px;
+
+    right:-38px;
+    bottom:-80px;
+
+    background:
+        rgba(46, 204, 113, 0.22);
+}
+
+#home > .card:first-child .title,
+#home > .card:first-child h1{
+    color:white;
+}
+
+#home > .card:first-child .subtitle{
+    color:rgba(255, 255, 255, 0.83);
+}
+
+#home > .card:first-child .subtitle:last-child{
+    margin-top:18px;
+
+    font-size:13px;
+    line-height:1.65;
+}
+
+
+/* ==========================================================
+   8. Market Score Card
+========================================================== */
+
+.row:first-of-type .card:first-child{
+    background:
+        linear-gradient(
+            145deg,
+            #FFFFFF,
+            #EDFFF5
+        );
+}
+
+.row:first-of-type .card:first-child::before{
+    content:"●";
+
+    position:absolute;
+
+    top:17px;
+    right:18px;
+
+    color:var(--green);
+
+    font-size:14px;
+
+    animation:pulse 1.8s infinite;
+}
+
+.row:first-of-type .card:first-child > p:last-child{
+    display:inline-flex;
+
+    margin-top:12px;
+    padding:6px 10px;
+
+    color:var(--green-dark);
+
+    background:var(--green-soft);
+
+    border-radius:999px;
+
+    font-size:12px;
+    font-weight:800;
+}
+
+
+/* ==========================================================
+   9. Total Asset Card
+========================================================== */
+
+.row:first-of-type .card:last-child{
+    background:
+        linear-gradient(
+            145deg,
+            #FFFFFF,
+            #F1EEFF
+        );
+}
+
+.row:first-of-type .card:last-child h2{
+    margin-top:14px;
+
+    color:var(--purple-dark);
+
+    font-size:19px;
+}
+
+
+/* ==========================================================
+   10. Buttons
+========================================================== */
+
+button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:44px;
+
+    margin-top:16px;
+    padding:11px 16px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--purple-dark)
+        );
+
+    border:none;
+    border-radius:var(--radius-small);
+
+    box-shadow:
+        0 8px 18px
+        rgba(114, 87, 245, 0.22);
+
+    cursor:pointer;
+
+    font-size:14px;
+    font-weight:800;
+
+    transition:
+        transform 0.18s ease,
+        opacity 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+button:hover{
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 11px 24px
+        rgba(114, 87, 245, 0.28);
+}
+
+button:active{
+    transform:scale(0.98);
+}
+
+button:focus-visible{
+    outline:
+        3px solid
+        rgba(114, 87, 245, 0.25);
+
+    outline-offset:3px;
+}
+
+
+/* ==========================================================
+   11. Daily Report Card
+========================================================== */
+
+#home > .card:nth-of-type(2){
+    border-left:
+        5px solid
+        var(--purple);
+}
+
+#home > .card:nth-of-type(2) h2{
+    max-width:330px;
+
+    font-size:21px;
+}
+
+
+/* ==========================================================
+   12. Chart Placeholder
+========================================================== */
+
+#home > .card:nth-of-type(3) > div{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:150px;
+
+    margin-top:16px;
+
+    color:var(--purple);
+
+    background:
+        repeating-linear-gradient(
+            135deg,
+            #F5F2FF,
+            #F5F2FF 12px,
+            #FAF9FF 12px,
+            #FAF9FF 24px
+        );
+
+    border:
+        1px dashed
+        rgba(114, 87, 245, 0.35);
+
+    border-radius:18px;
+
+    font-size:14px;
+    font-weight:750;
+}
+
+
+/* ==========================================================
+   13. Goal Card
+========================================================== */
+
+#home > .card:nth-of-type(4){
+    background:
+        linear-gradient(
+            145deg,
+            #FFFFFF,
+            #F0FFF7
+        );
+}
+
+#home > .card:nth-of-type(4) h2{
+    margin-top:7px;
+
+    color:var(--green-dark);
+
+    font-size:31px;
+}
+
+
+/* ==========================================================
+   14. Index and Consultation Cards
+========================================================== */
+
+#home .row:nth-of-type(2) .card:first-child p:not(.subtitle){
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:10px 0;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    font-size:13px;
+    font-weight:750;
+}
+
+#home .row:nth-of-type(2) .card:first-child p:last-child{
+    border-bottom:none;
+}
+
+#home .row:nth-of-type(2) .card:last-child{
+    background:
+        linear-gradient(
+            145deg,
+            #FFFFFF,
+            #F2EEFF
+        );
+}
+
+
+/* ==========================================================
+   15. Portfolio and Recommendation Lists
+========================================================== */
+
+#home > .card:nth-last-of-type(3) > div,
+#home > .card:nth-last-of-type(2) > div{
+    margin-top:15px;
+}
+
+#home > .card:nth-last-of-type(3) > div p,
+#home > .card:nth-last-of-type(2) > div p{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    min-height:47px;
+
+    padding:11px 13px;
+
+    color:var(--text-soft);
+
+    background:#F8F9FC;
+
+    border:
+        1px solid
+        #EEF0F5;
+
+    border-radius:14px;
+
+    font-size:14px;
     font-weight:700;
+}
+
+#home > .card:nth-last-of-type(2) > div p{
+    background:var(--purple-soft);
+    border-color:#E5DEFF;
+}
+
+
+/* ==========================================================
+   16. THPT Comment Card
+========================================================== */
+
+#home > .card:last-child{
+    padding-left:78px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7458F4,
+            #6649DD
+        );
+
+    color:white;
+
+    border:none;
+}
+
+#home > .card:last-child::before{
+    content:"•ᴗ•";
+
+    position:absolute;
+
+    top:50%;
+    left:20px;
+
+    transform:translateY(-50%);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:44px;
+    height:44px;
+
+    color:var(--purple-dark);
+    background:white;
+
+    border-radius:15px;
+
+    font-size:16px;
+    font-weight:900;
+}
+
+#home > .card:last-child h2{
+    color:white;
+
+    font-size:18px;
+    line-height:1.55;
+}
+
+#home > .card:last-child .subtitle{
+    color:rgba(255, 255, 255, 0.73);
+}
+
+
+/* ==========================================================
+   Bottom Navigation Button
+========================================================== */
+
+#bottom-nav button{
+    flex:1;
+
+    min-height:52px;
+
+    margin:0;
+    padding:6px 4px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+
+    color:var(--gray);
+    background:transparent;
+
+    border:none;
+    border-radius:15px;
+
+    box-shadow:none;
+
+    cursor:pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+#bottom-nav button:hover{
+    transform:translateY(-1px);
+    box-shadow:none;
+}
+
+#bottom-nav button:active{
+    transform:scale(0.97);
+}
+
+#bottom-nav button.active{
+    color:var(--purple);
+    background:var(--purple-soft);
+}
+
+
+/* ==========================================================
+   Bottom Navigation Icon
+========================================================== */
+
+.nav-icon{
+    font-size:20px;
+    line-height:1;
+}
+
+
+/* ==========================================================
+   Bottom Navigation Label
+========================================================== */
+
+.nav-label{
+    font-size:11px;
+    line-height:1.2;
+    font-weight:700;
+    letter-spacing:-0.2px;
+}
+#bottom-nav button:first-child{
+    color:var(--purple);
+    background:var(--purple-soft);
+}
+
+
+/* ==========================================================
+   18. Animations
+========================================================== */
+
+@keyframes pulse{
+    0%{
+        opacity:0.35;
+        transform:scale(0.8);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.05);
+    }
+
+    100%{
+        opacity:0.35;
+        transform:scale(0.8);
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+#home > *{
+    animation:
+        fadeUp
+        0.45s ease
+        both;
+}
+
+#home > *:nth-child(2){
+    animation-delay:0.04s;
+}
+
+#home > *:nth-child(3){
+    animation-delay:0.08s;
+}
+
+#home > *:nth-child(4){
+    animation-delay:0.12s;
+}
+
+#home > *:nth-child(5){
+    animation-delay:0.16s;
+}
+
+
+/* ==========================================================
+   19. Hidden Sections
+========================================================== */
+
+#portfolio,
+#report,
+#score,
+#chat{
+    display:none;
+}
+
+
+/* ==========================================================
+   20. Responsive
+========================================================== */
+
+@media (max-width:390px){
+
+    #app{
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .row{
+        grid-template-columns:1fr;
+    }
+
+    .title{
+        font-size:24px;
+    }
+
+    .score{
+        font-size:40px;
+    }
+
+    .card{
+        padding:18px;
+        border-radius:22px;
+    }
+
+}
+
+@media (min-width:700px){
+
+    body{
+        padding:25px 0;
+    }
+
+    #app{
+        border-radius:30px;
+
+        box-shadow:
+            0 20px 65px
+            rgba(38, 29, 88, 0.1);
+    }
+
 }
