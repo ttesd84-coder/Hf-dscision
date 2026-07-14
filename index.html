@@ -1,233 +1,41 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>HF Decision v0.3</title>
-<style>
-:root{--bg:#f5f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#2563eb;--good:#16a34a;--warn:#d97706;--bad:#dc2626;--soft:#eef2ff}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans KR",sans-serif}
-button,input,textarea,select{font:inherit}.app{max-width:520px;margin:0 auto;min-height:100vh;padding:18px 16px 98px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.brand{font-weight:900;font-size:24px}.sub{font-size:13px;color:var(--muted)}
-.badge{font-size:12px;padding:6px 9px;border-radius:999px;background:var(--soft);color:#3730a3;font-weight:800}
-.card{background:var(--card);border-radius:22px;padding:18px;box-shadow:0 8px 30px rgba(17,24,39,.06);margin-bottom:14px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.label{font-size:13px;color:var(--muted)}.value{font-size:22px;font-weight:850;margin-top:4px}
-.score{font-size:46px;font-weight:900;line-height:1}.section-title{font-size:17px;font-weight:900;margin-bottom:12px}
-.row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer}.row:last-child{border-bottom:none}
-.name{font-weight:800}.small{font-size:12px;color:var(--muted)}.action{font-weight:850}.buy{color:var(--good)}.hold{color:var(--warn)}.sell{color:var(--bad)}
-.cta{width:100%;border:0;border-radius:16px;padding:14px;font-weight:850;background:var(--accent);color:#fff;cursor:pointer}.ghost{background:var(--soft);color:#1d4ed8}
-.hero{font-size:20px;font-weight:900;line-height:1.4}.progress{height:14px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:12px}.bar{height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed)}
-.chart-wrap{height:190px;border:1px solid var(--line);border-radius:16px;padding:10px;background:linear-gradient(#fafafa,#fff)}.chart-wrap svg{width:100%;height:100%}
-.tabs{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(520px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-top:1px solid var(--line);padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:20}
-.tab{border:0;background:none;padding:8px 2px;color:var(--muted);font-weight:800;font-size:13px}.tab.active{color:var(--accent)}.view{display:none}.view.active{display:block}
-input,textarea,select{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px;background:#fff}textarea{min-height:100px;resize:vertical}
-.field{margin-bottom:13px}.pill{display:inline-block;padding:5px 9px;border-radius:999px;background:#f3f4f6;font-size:12px;font-weight:800}
-.upload{border:2px dashed #c7d2fe;border-radius:18px;padding:16px;text-align:center;background:#fafaff}.upload input{display:none}.preview{display:none;margin-top:12px;width:100%;max-height:250px;object-fit:contain;border-radius:14px}
-.modal{position:fixed;inset:0;background:rgba(17,24,39,.45);display:none;align-items:flex-end;justify-content:center;z-index:50}.modal.open{display:flex}
-.sheet{width:min(520px,100%);background:#fff;border-radius:24px 24px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}
-.sheet-top{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#f3f4f6;border-radius:999px;width:36px;height:36px;font-size:20px}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.box{background:#f8fafc;border-radius:16px;padding:13px}.box b{display:block;margin-top:4px}
-.reason{background:#f8fafc;border-radius:16px;padding:14px;line-height:1.55;font-size:14px}.inline{display:flex;gap:10px}.inline .cta{flex:1}
-.notice{font-size:12px;color:var(--muted);line-height:1.5;margin-top:8px}.result{display:none}.result.show{display:block}
-</style>
-</head>
 <body>
-<div class="app">
-  <div class="top">
-    <div><div class="brand">HF Decision</div><div class="sub">개인용 AI 투자 비서</div></div>
-    <span class="badge">MVP v0.3</span>
-  </div>
 
-  <section id="home" class="view active">
-    <div class="grid2">
-      <div class="card"><div class="label">시장 점수</div><div class="score" id="marketScore">63</div><div class="small" id="marketState">관망</div></div>
-      <div class="card"><div class="label">잔여 현금</div><div class="value">2,760,000원</div><div class="small">운용자금 기준</div></div>
-    </div>
+<div id="app">
 
-    <div class="card"><div class="section-title">오늘 해야 할 행동</div><div class="hero">NAVER 3주 매수 완료<br>추가매수 없이 관찰</div></div>
+<header>
 
-    <div class="card">
-      <div class="section-title">목표 자산</div>
-      <div class="grid2"><div><div class="label">현재</div><div class="value">8,334,614원</div></div><div><div class="label">목표</div><div class="value">10,000,000원</div></div></div>
-      <div class="progress"><div class="bar" style="width:83.3%"></div></div><div class="small" style="margin-top:8px">2027-12-31까지 83.3% 달성</div>
-    </div>
+</header>
 
-    <div class="card">
-      <div class="section-title">등락률 그래프</div>
-      <div class="chart-wrap">
-        <svg viewBox="0 0 360 160">
-          <line x1="22" y1="80" x2="342" y2="80" stroke="#d1d5db"/>
-          <polyline points="22,106 76,99 130,112 184,91 238,77 292,84 342,67" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/>
-          <g fill="#2563eb"><circle cx="22" cy="106" r="4"/><circle cx="76" cy="99" r="4"/><circle cx="130" cy="112" r="4"/><circle cx="184" cy="91" r="4"/><circle cx="238" cy="77" r="4"/><circle cx="292" cy="84" r="4"/><circle cx="342" cy="67" r="4"/></g>
-        </svg>
-      </div>
-      <div class="notice">현재는 샘플 그래프입니다. 실제 API 연결 시 보유자산 수익률 또는 종목별 가격 흐름으로 대체됩니다.</div>
-    </div>
+<main>
 
-    <div class="card">
-      <div class="section-title">오늘의 증시 정보</div>
-      <div class="upload">
-        <label for="marketUpload" style="cursor:pointer;font-weight:850">증시 캡처 업로드</label>
-        <div class="small" style="margin-top:6px">업로드 후 시장점수를 직접 저장할 수 있습니다.</div>
-        <input id="marketUpload" type="file" accept="image/*" onchange="previewMarket(event)">
-        <img id="marketPreview" class="preview">
-      </div>
-      <div class="field" style="margin-top:14px"><label class="label">시장 점수</label><input id="marketScoreInput" type="number" min="0" max="100" value="63"></div>
-      <div class="inline"><button class="cta" onclick="saveMarketScore()">점수 저장</button><button class="cta ghost" onclick="refreshMarket()">↻ 새로고침</button></div>
-      <div class="notice" id="syncNotice">새로고침 시 SPY·QQQ·달러/원 데이터를 불러와 시장점수를 자동 계산합니다. 국내 종목은 별도 데이터 소스 연결이 필요합니다.</div>
-    </div>
+<section id="home"></section>
 
-    <div class="card">
-      <div class="section-title">관심 종목</div>
-      <div id="watchRows"></div>
-    </div>
-  </section>
+<section id="portfolio"></section>
 
-  <section id="portfolio" class="view">
-    <div class="card"><div class="section-title">보유 종목</div><div id="holdingRows"></div></div>
-  </section>
+<section id="report"></section>
 
-  <section id="report" class="view">
-    <div class="card">
-      <div class="section-title">Daily Report · 2026.07.14</div>
-      <div class="row" style="cursor:default"><span class="name">시장</span><span class="action hold" id="reportScore">63 · 관망</span></div>
-      <div class="row" style="cursor:default"><span class="name">추천</span><span class="action buy">NAVER</span></div>
-      <div class="row" style="cursor:default"><span class="name">실행</span><span class="name">3주 매수 완료</span></div>
-      <div class="row" style="cursor:default"><span class="name">ETF</span><span class="action hold">오늘 적립 없음</span></div>
-    </div>
-  </section>
+<section id="score"></section>
 
-  <section id="watch" class="view">
-    <div class="card"><div class="section-title">High Fly Score</div><div id="scoreRows"></div></div>
-  </section>
+<section id="chat"></section>
 
-  <section id="add" class="view">
-    <div class="card">
-      <div class="section-title">관심 종목 분석 추가</div>
-      <div class="field"><label class="label">종목 또는 테마</label><input id="ideaName" placeholder="예: 한화오션, 원전, 로봇"></div>
-      <div class="field"><label class="label">구분</label><select id="ideaType"><option value="종목">종목</option><option value="테마">테마</option></select></div>
-      <div class="field"><label class="label">내가 보는 근거</label><textarea id="ideaReason" placeholder="예: 수주 증가, 실적 개선 기대, 차트 눌림목 등"></textarea></div>
-      <button class="cta" onclick="runIdeaAnalysis()">AI 분석하기</button>
-      <div class="notice">현재 프로토타입에서는 입력 내용을 기반으로 로컬 규칙으로 점수를 시뮬레이션합니다. 실제 뉴스·공시 기반 AI 분석은 서버와 웹 검색/API 연결 후 작동합니다.</div>
-    </div>
+</main>
 
-    <div id="ideaResult" class="card result">
-      <div class="section-title">AI 분석 결과</div>
-      <div class="detail-grid">
-        <div class="box"><div class="label">점수</div><b id="ideaScore"></b></div>
-        <div class="box"><div class="label">판단</div><b id="ideaAction"></b></div>
-      </div>
-      <div class="reason" id="ideaOpinion"></div>
-      <div class="inline" style="margin-top:14px"><button class="cta" onclick="confirmAdd('watch')">관심 종목에 추가</button><button class="cta ghost" onclick="confirmAdd('holding')">보유 종목에 추가</button></div>
-    </div>
-  </section>
-</div>
+<nav>
 
-<nav class="tabs">
-<button class="tab active" onclick="switchTab('home',this)">홈</button>
-<button class="tab" onclick="switchTab('portfolio',this)">자산</button>
-<button class="tab" onclick="switchTab('report',this)">리포트</button>
-<button class="tab" onclick="switchTab('watch',this)">점수</button>
-<button class="tab" onclick="switchTab('add',this)">추가</button>
 </nav>
 
-<div class="modal" id="detailModal" onclick="closeModal(event)">
-  <div class="sheet" onclick="event.stopPropagation()">
-    <div class="sheet-top"><div><div class="label" id="detailType"></div><div class="brand" id="detailName" style="font-size:22px"></div></div><button class="close" onclick="closeModal()">×</button></div>
-    <div class="detail-grid">
-      <div class="box"><div class="label">현재 판단</div><b id="detailAction"></b></div>
-      <div class="box"><div class="label">점수</div><b id="detailScore"></b></div>
-      <div class="box"><div class="label">익절 타이밍</div><b id="detailTake"></b></div>
-      <div class="box"><div class="label">손절 타이밍</div><b id="detailStop"></b></div>
-    </div>
-    <div class="section-title">간단한 사유</div><div class="reason" id="detailReason"></div>
-  </div>
 </div>
 
-<div class="modal" id="confirmModal">
-  <div class="sheet">
-    <div class="sheet-top"><div class="brand" style="font-size:22px">추가할까요?</div><button class="close" onclick="closeConfirm()">×</button></div>
-    <p id="confirmText" style="line-height:1.6"></p>
-    <div class="inline"><button class="cta" onclick="finalizeAdd()">추가</button><button class="cta ghost" onclick="closeConfirm()">취소</button></div>
-  </div>
-</div>
+<script src="js/app.js"></script>
 
-<script>
-const baseWatch=[
- {id:'naver',name:'NAVER',score:84,action:'분할매수',take:'190,000원 1차 확인',stop:'183,000원 종가 이탈 시 재검토',reason:'외국인·기관 수급과 조정 구간이 긍정적입니다. 다만 시장 점수가 낮아 추가매수는 추세 회복 확인 뒤로 미룹니다.'},
- {id:'doosan',name:'두산에너빌리티',score:77,action:'대기',take:'75,000원대 반등 시 검토',stop:'70,000원 종가 이탈 시 제외 검토',reason:'원전·전력 모멘텀은 유효하지만 단기 하락 추세입니다. 7만 원 지지 확인이 우선입니다.'},
- {id:'hd',name:'HD현대일렉트릭',score:72,action:'관망',take:'820,000원대 반등 시 검토',stop:'750,000원 이탈 시 제외 검토',reason:'전력기기 업황은 좋지만 고점 대비 조정 폭이 큽니다. 지지와 반등 거래량 확인이 필요합니다.'}
-];
-const baseHold=[
- {id:'samsung',name:'삼성전자',score:'코어',action:'락업 유지',take:'2027년 1월 전 재설정',stop:'락업 중 매도 불가',reason:'장기 코어 자산으로 실적과 반도체 업황만 점검합니다.'},
- {id:'sp500',name:'미국 S&P500(H)',score:'코어 ETF',action:'적립 유지',take:'목표자산 달성 시 리밸런싱',stop:'단기 손절보다 적립 중단 검토',reason:'장기 분산용 ETF입니다. 단기 변동보다 적립과 환헤지 비용을 관리합니다.'},
- {id:'naverHold',name:'NAVER 3주',score:84,action:'보유',take:'190,000원 부근 1차 판단',stop:'183,000원 종가 이탈 시 대응',reason:'신규 편입 종목입니다. 추가매수 없이 수급과 18만 원대 지지를 확인합니다.'}
-];
-let watch=[...baseWatch,...JSON.parse(localStorage.getItem('hfExtraWatch')||'[]')];
-let holdings=[...baseHold,...JSON.parse(localStorage.getItem('hfExtraHold')||'[]')];
-let pendingAdd=null;
+<script src="js/home.js"></script>
 
-function switchTab(id,btn){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn?.classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
-function state(score){if(score>=80)return'분할매수';if(score>=70)return'관찰';if(score>=60)return'관망';return'제외'}
-function renderLists(){
- const make=(x,type)=>`<div class="row" onclick='openDetail(${JSON.stringify(x)},${JSON.stringify(type)})'><div><div class="name">${x.name}</div><div class="small">${type}</div></div><div class="action ${Number(x.score)>=80?'buy':'hold'}">${x.score} · ${x.action}</div></div>`;
- document.getElementById('watchRows').innerHTML=watch.map(x=>make(x,'관심종목')).join('');
- document.getElementById('holdingRows').innerHTML=holdings.map(x=>make(x,'보유종목')).join('');
- document.getElementById('scoreRows').innerHTML=watch.map(x=>make(x,'관심종목')).join('');
-}
-function openDetail(x,type){document.getElementById('detailType').textContent=type;document.getElementById('detailName').textContent=x.name;document.getElementById('detailAction').textContent=x.action;document.getElementById('detailScore').textContent=x.score;document.getElementById('detailTake').textContent=x.take;document.getElementById('detailStop').textContent=x.stop;document.getElementById('detailReason').textContent=x.reason;document.getElementById('detailModal').classList.add('open')}
-function closeModal(e){if(e&&e.target.id!=='detailModal')return;document.getElementById('detailModal').classList.remove('open')}
-function previewMarket(e){const f=e.target.files[0];if(!f)return;const img=document.getElementById('marketPreview');img.src=URL.createObjectURL(f);img.style.display='block'}
-function saveMarketScore(){const s=Math.max(0,Math.min(100,Number(document.getElementById('marketScoreInput').value||0)));localStorage.setItem('hfMarketScore',s);applyScore(s);alert('시장 점수를 저장했습니다.')}
-function applyScore(s){document.getElementById('marketScore').textContent=s;document.getElementById('marketState').textContent=s>=80?'적극 매수':s>=70?'분할매수':s>=60?'관망':'현금 유지';document.getElementById('reportScore').textContent=s+' · '+document.getElementById('marketState').textContent}
-async function refreshMarket(){
-  const notice=document.getElementById('syncNotice');
-  notice.textContent='시장 데이터를 불러오는 중입니다...';
-  try{
-    const response=await fetch('/api/market');
-    const data=await response.json();
-    if(!response.ok) throw new Error(data.error||'시장 데이터 조회 실패');
+<script src="js/portfolio.js"></script>
 
-    const score=Number(data.marketScore);
-    document.getElementById('marketScoreInput').value=score;
-    localStorage.setItem('hfMarketScore',String(score));
-    applyScore(score);
+<script src="js/report.js"></script>
 
-    const summary=[
-      `S&P500 대용(SPY): ${data.assets.SPY.price ?? '-'} (${fmtRate(data.assets.SPY.changePercent)}%)`,
-      `나스닥100 대용(QQQ): ${data.assets.QQQ.price ?? '-'} (${fmtRate(data.assets.QQQ.changePercent)}%)`,
-      `달러/원: ${data.assets.USDKRW.price ?? '-'} (${fmtRate(data.assets.USDKRW.changePercent)}%)`
-    ].join(' · ');
+<script src="js/score.js"></script>
 
-    notice.textContent=`${summary} | 업데이트 ${new Date(data.updatedAt).toLocaleTimeString('ko-KR')}`;
-  }catch(err){
-    notice.textContent='업데이트 실패: '+(err?.message||'알 수 없는 오류');
-  }
-}
-function fmtRate(value){
-  const n=Number(value);
-  if(!Number.isFinite(n)) return '-';
-  return `${n>0?'+':''}${n.toFixed(2)}`;
-}
-function runIdeaAnalysis(){
- const name=document.getElementById('ideaName').value.trim(),reason=document.getElementById('ideaReason').value.trim(),type=document.getElementById('ideaType').value;
- if(!name){alert('종목 또는 테마를 입력해 주세요.');return}
- let score=62+Math.min(18,Math.floor(reason.length/8));
- if(/실적|수주|기관|외국인|성장|흑자|모멘텀/.test(reason))score+=5;
- if(/급등|상한가|몰빵|소문/.test(reason))score-=6;
- score=Math.max(45,Math.min(90,score));
- const action=state(score);
- pendingAdd={id:'custom_'+Date.now(),name,type,score,action,take:'+8~12% 구간에서 1차 익절 검토',stop:'-5~-7% 또는 핵심 지지 이탈 시 재검토',reason:`입력한 근거를 기준으로 한 프로토타입 판단입니다. 현재 점수는 ${score}점이며 ${action} 의견입니다. 실제 버전에서는 최근 뉴스·공시·수급·차트를 웹에서 확인해 다시 계산합니다.`};
- document.getElementById('ideaScore').textContent=score+'점';document.getElementById('ideaAction').textContent=action;document.getElementById('ideaOpinion').textContent=pendingAdd.reason;document.getElementById('ideaResult').classList.add('show');
-}
-function confirmAdd(target){if(!pendingAdd)return;pendingAdd.target=target;document.getElementById('confirmText').textContent=`${pendingAdd.name}을(를) ${target==='watch'?'관심 종목':'보유 종목'}에 추가하시겠습니까?`;document.getElementById('confirmModal').classList.add('open')}
-function closeConfirm(){document.getElementById('confirmModal').classList.remove('open')}
-function finalizeAdd(){
- if(pendingAdd.target==='watch'){const arr=JSON.parse(localStorage.getItem('hfExtraWatch')||'[]');arr.push(pendingAdd);localStorage.setItem('hfExtraWatch',JSON.stringify(arr));watch.push(pendingAdd)}
- else{const arr=JSON.parse(localStorage.getItem('hfExtraHold')||'[]');arr.push(pendingAdd);localStorage.setItem('hfExtraHold',JSON.stringify(arr));holdings.push(pendingAdd)}
- renderLists();closeConfirm();alert('추가했습니다.');
-}
-renderLists();applyScore(Number(localStorage.getItem('hfMarketScore')||63));
-</script>
+<script src="js/chat.js"></script>
+
 </body>
-</html>
